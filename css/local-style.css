@@ -1,0 +1,122 @@
+
+ body { visibility: hidden; }
+
+.stimuli {
+  height: 350px;
+  width: 350px;
+}
+
+.stimuli img {
+  width: 100%;
+  height: auto;
+}
+
+divl {
+  text-align: left;
+  line-height: 90%;
+  font-size: 12px;
+}
+
+
+button{
+
+  font-size: 16px;
+
+}
+
+#i0{
+  border: none;
+
+}
+
+#conditionOne {
+    border: none;
+
+}
+
+#conditionTwo {
+    border: none;
+
+}
+
+#conditionThree {
+    border: none;
+
+}
+
+#conditionFour {
+    border: none;
+
+}
+
+#subj_info {
+  border: none;
+
+}
+
+.checkboxgroup {
+	display: inline-block;
+	text-align: center;
+	padding: 30px;
+  }
+.checkboxgroup label {
+	display: block;
+  }
+
+.checkboxtable label {
+	display: block;
+    }
+
+.checkboxtable {
+    display: inline-block;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    }
+
+  td {
+      width: 70px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+#check1 {
+
+    padding: 0px;
+  }
+  
+#check7 {
+  
+    padding: 0px; 
+  }
+  
+  
+  
+  .slide {
+    /*pad the inside of the slide*/
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  
+      /*center slide within the window*/
+    margin: auto auto;
+    margin-top: 0px;
+  
+    /*all elements in a slide will be centered by default*/
+      text-align: center;
+  
+      border: 1px solid #04abe3;
+      width: 1200px;
+      height: 1600px;
+  
+      /*could explicitly set the following, but these are the defaults for me (chrome, linux)*/
+      font-size: 20px;
+      background-color: rgb(255,255,255);
+  }
+
+  .blue{
+    position: relative;
+    top: 5px;
+  };

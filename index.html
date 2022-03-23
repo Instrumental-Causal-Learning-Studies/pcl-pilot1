@@ -1,0 +1,464 @@
+<html>
+
+<head>
+    <title>SCL study</title>
+
+    <!--JS-->
+
+    <!-- external general utilities -->
+    <script src="shared/jquery-1.11.1.min.js"></script>
+    <script src="shared/jquery-ui.min.js"></script>
+    <script src="shared/underscore-min.js"></script>
+    <!-- if you want to draw stuff: -->
+    <!-- <script src="_shared/js/raphael-min.js"></script> -->
+
+    <!-- cocolab experiment logic -->
+    <script src="shared/exp-V2.js"></script>
+    <script src="shared/stream-V2.js"></script>
+
+    <!-- cocolab general utilities -->
+    <script src="shared/mmturkey.js "></script>
+    <script src="shared/browserCheck.js"></script>
+    <script src="shared/utils.js"></script>
+    <script src="shared/uniqueturker.js"></script>
+    <!-- if you want to draw cute creatures (depends on raphael): -->
+    <!-- <script src="_shared/js/ecosystem.js"></script> -->
+    <!-- experiment specific helper functions -->
+    <!-- <script src="js/local-utils.js"></script> -->
+
+    <!--CSS-->
+    <link href="shared/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="shared/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- experiment file -->
+    <script src="js/scl.js"></script>
+
+
+</head>
+
+<body onload="init(); delay(100)">
+  <noscript>This task requires JavaScript.</noscript>
+
+  <div class="slide" id="i0" >
+    <img src="media/nus-logo.jpg" alt="NUS" id="cocologo"></img>
+    <p id="cocolab">National University of Singapore</p>
+    <p id="instruct-text">In this study, you will be presented with a short clip and tasked to answer some questions it. The HIT should take ~7 minutes.</p>
+    <p> No identification information will be collected and all demographic questions are optional. You may withdraw from the project
+      at any time, without giving any reasons, even after beginning the study. All data that you have provided will be discarded and will not be used by the research team. 
+      For further information regarding this study, you may read the participant information below or contact Dennis Teo 
+      at <a href="mailto://dennisteowh@u.nus.edu">dennisteowh@u.nus.edu</a>.</p> <br>
+   
+   
+    <p> If you consent to taking part in this study, please click "Start Experiment" to indicate your consent and begin the study. </p>
+    <button id="start_button" type="button">Start Experiment</button>
+
+    <hr>
+    <p id="legal" style = "font-size: large; text-align: left"><b><u>Participant Information</u></b></p>
+    <divl>
+    <p><b>Project Title:</b> Modelling Causal Learning in Social and Affective Settings</p>
+    <p><b>Purpose of project:</b> This study investigates causal learning. </p>
+    <p><b>Who can participate in this project? What is the expected duration of participation? What is the duration of this project?</b></p>
+    <p>Anyone based in the United States who are at least 21 years old are eligible to participate in this experiment that lasts about 15 minutes. </p>
+    <p><b>How many participants will be involved?</b> </p>
+    <p>Approximately 1000 participants will be involved in this study.</p>
+    <p><b>What procedures will this project involve?</b></p>
+    <p>You will be presented with short videos and tasked to answer questions relating to the video. 
+      You will then proceed to fill in a number of survey questions and provide demographic information (age, gender, native language, etc.).</p>
+    <p><b>How will participants&apos; data be kept confidential?</b></p>
+    <p>All project records and data will be kept strictly confidential. 
+      No identifiable information (names, identity card or address, etc.) will be collected in this study. 
+    </p>
+    <p><b>What are the possible discomforts and/or risks for participants?</b></p>
+    <p>No risks, discomforts or injury are expected in your participation in this experiment.</p>
+    <p><b>Will there be reimbursement for participation?</b></p>
+    <p>You will receive US$8 point for every hour of participation.</p>
+    <p>	<b>What are the possible benefits of this project?</b> </p>
+    <p>The knowledge gained from this project may benefit the public in the future. </p>
+    <p><b>Can a person refuse to participate in this project?</b></p>
+    <p>Yes, you can. Your decision to participate in this project is voluntary and completely up to you. Should you choose to participate, you can still withdraw from the project at any time, without giving any reasons, by informing the principal investigator. All data and/or samples that you have provided will then be discarded.
+    </p>
+    <p><b>Who should participants call if there are any questions or problems?</b></p>
+    <p>Please contact Dennis Teo 
+      at <a href="mailto://dennisteowh@u.nus.edu">dennisteowh@u.nus.edu</a> 
+        for all matters related to this project and in the event of project-related problems.</p>
+    </divl>
+
+
+  </div>
+
+  <div class="slide" id="botcaptcha">
+    <h3>Are you a bot?</h3>
+    <div id="bot_context"> </div>
+    <input type="text" id="botresponse" size="30"></input>
+    <button onclick="_s.button()" id="bot_button">Continue</button>
+    <p class="text" id="error_incorrect" style="color: #7CB637">This is incorrect.</p>
+    <p class="text" id="error_2more" style="color: #7CB637">You have 2 more trials.</p>
+    <p class="text" id="error_1more" style="color: #7CB637">You have 1 more trial.</p>
+    <p class="text" id="error" style="color: #7CB637">Error: You failed the comprehension questions too many times.
+    You are not permitted to complete the HIT. Please click 'Return HIT' to avoid any impact on your approval rating.
+    <br/><br/>
+    If you believe you are receiving thin message in error, please email <a href="mailto:tessler@mit.edu">tessler@mit.edu</a> </p>
+  </div>
+
+
+  <div class="slide" id="instructions01">
+    <h3>Instructions</h3>
+    <p>In this study, you will be presented with a short video. You will be asked to share how you made sense of the video's contents after watching it.<br> </p>
+    <p><b> Ensure that your device volume is ON before starting each video. </b><br></p> 
+    <p><b>Please play the audio below and check that you can comfortably hear the clicking sound.</b><br></p>
+        <audio controls>
+          <source src="media/button-sound.mp3" type="audio/mpeg">
+        </audio> <br><br>
+    <p>After moving onto the next page, click on "Play Video" to start the video.<br></p>
+    <p><b>Please focus on the video from start to finish.</b><br></p> 
+    <p>When the video is over, you will automatically be directed to the next part of the experiment.<br></p>
+       
+    <button onclick="_s.button()">Continue</button>
+  </div>
+
+  <div class="slide"  id="conditionBall">
+      <video id="myVideo" width="700" height="600" >
+        <source src="media/wind-ball.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+      </video>
+      <audio id="start-video" preload="none">
+        <source src="media/start-vid.mp3" type="audio/mpeg">
+    </audio>
+      <button onclick="_s.button()">Play Video</button> 
+  </div>
+
+  <div class="slide" id="comments01">
+    <p>Please share what you think was happening in the video you just saw.</p>
+    <textarea id="comments1" rows="8" cols="50"></textarea>
+       
+    <button onclick="_s.button()">Continue</button>
+  </div>
+
+
+<div class="slide" id="causalMatrix1">
+  <p>Based on the video you just saw, answer the following questions.</p>
+  <p style = "font-size: 14px"> (One frame of the video is provided below for reference)</p>
+  <p>For each of the following item(s), rate how likely you think it is the primary cause of the door opening.</p>
+  <table>   
+    <tr>
+      <th></th>
+      <th>Extremely<br> Unlikely<br></th>
+      <th></th> 
+      <th></th> 
+      <th></th> 
+      <th></th> 
+      <th></th> 
+      <th></th> 
+      <th></th> 
+      <th>Extremely<br> Likely<br></th>
+    </tr>
+    <tr> 
+    <th><div class="checkboxtable">
+      <p><img src="media/blue.png" width=15px height=30px class="blue"> ONLY </p>
+    </div></th> 
+    <td><div class="checkboxtable">
+      <label>1</label>
+      <input type="radio" name="blue1" value="1">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>2</label>
+      <input type="radio" name="blue1" value="2">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>3</label>
+      <input type="radio" name="blue1" value="3">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>4</label>
+      <input type="radio" name="blue1" value="4">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>5</label>
+      <input type="radio" name="blue1" value="5">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>6</label>
+      <input type="radio" name="blue1" value="6">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>7</label>
+      <input type="radio" name="blue1" value="7">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>8</label>
+      <input type="radio" name="blue1" value="8">
+    </div></td> 
+    <td><div class="checkboxtable">
+      <label>9</label>
+      <input type="radio" name="blue1" value="9">
+    </div></td> 
+    </tr>
+
+    <tr> 
+      <th><div class="checkboxtable">
+        <p><img src="media/pink.png" width=15px height=30px class="blue"> ONLY</p>
+      </div></th> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="1">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="2">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="3">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="4">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="5">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="6">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="7">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="8">
+      </div></td> 
+      <td><div class="checkboxtable">
+        <input type="radio" name="pink1" value="9">
+      </div></td> 
+      </tr>
+
+      <tr> 
+        <th><div class="checkboxtable">
+          <p><img src="media/orange.png" width=15px height=30px class="blue"> ONLY</p>
+        </div></th> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="1">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="2">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="3">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="4">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="5">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="6">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="7">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="8">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="orange1" value="9">
+        </div></td> 
+      </tr>
+
+      <tr> 
+        <th></td><div class="checkboxtable">
+          <p><img src="media/blue.png" width=15px height=30px class="blue"> AND <img src="media/pink.png" width=15px height=30px class="blue"></p>
+        </div></th> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="1">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="2">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="3">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="4">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="5">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="6">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="7">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="8">
+        </div></td> 
+        <td><div class="checkboxtable">
+          <input type="radio" name="bp1" value="9">
+        </div></td> 
+        </tr>
+
+        <tr> 
+          <th><div class="checkboxtable">
+            <p><img src="media/pink.png" width=15px height=30px class="blue"> AND <img src="media/orange.png" width=15px height=30px class="blue"></p>
+          </div></th> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="1">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="2">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="3">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="4">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="5">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="6">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="7">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="8">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="po1" value="9">
+          </div></td> 
+        </tr>
+
+        <tr> 
+          <th><div class="checkboxtable">
+            <p><img src="media/blue.png" width=15px height=30px class="blue"> AND <img src="media/orange.png" width=15px height=30px class="blue"></p>
+          </div></th> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="1">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="2">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="3">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="4">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="5">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="6">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="7">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="8">
+          </div></td> 
+          <td><div class="checkboxtable">
+            <input type="radio" name="bo1" value="9">
+          </div></td> 
+          </tr>
+
+            <tr> 
+              <th><div class="checkboxtable">
+                  <p><img src="media/blue.png" width=15px height=30px class="blue"> AND <img src="media/pink.png" width=15px height=30px class="blue"> AND <img src="media/orange.png" width=15px height=30px class="blue"></p>
+              </div></th> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="1">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="2">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="3">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="4">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="5">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="6">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="7">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="8">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="all1" value="9">
+              </div></td> 
+            </tr>
+
+            <tr> 
+              <th><div class="checkboxtable">
+                <p>Other Causes</p>
+              </div></th> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="1">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="2">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="3">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="4">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="5">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="6">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="7">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="8">
+              </div></td> 
+              <td><div class="checkboxtable">
+                <input type="radio" name="other1" value="9">
+              </div></td> 
+            </tr>
+
+    </table>
+  <button onclick="_s.button()">Continue</button>
+  <div class="err">Please answer the question before continuing.</div>
+  <div class = "stimuli">
+    <img src="media/ball-pic.png"></img>
+  </div>
+</div>
+
+<div class="slide" id="measure01">
+  <p>Please share the thoughts you had when answering the previous question. How did you decide on your responses for it?</p>
+  <textarea id="measure1" rows="8" cols="50"></textarea>
+     
+  <button onclick="_s.button()">Continue</button>
+</div>
+
+  <div id="thanks" class="slide js" >
+    <p  class="big">Thanks for your Time!</p><br>
+    <p class="big">Please drop a message to the experimenter that you have completed the survey with the following code: "rT36n2s".</p>
+  </div>
+
+  <div class="progress">
+    <span>Progress:</span>
+    <div class="bar-wrapper">
+      <div class="bar" width="0%">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</body>
+</html>
